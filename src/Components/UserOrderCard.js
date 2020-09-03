@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from "react";
 import axios from 'axios';
+import moment from 'moment';
 
 const UserOrderCard = () => {
 
@@ -7,7 +8,7 @@ const UserOrderCard = () => {
   useEffect(()=>{
     axios.get("http://localhost:3124/api/orders/orders",{withCredentials:true})
     .then((data) =>{
-      setOrder(data);
+      setOrder(data.data);
       console.log(data);
     })
   },[])
@@ -19,7 +20,7 @@ const UserOrderCard = () => {
         id="vouchertable"
         style={{ background: "white", marginTop: "20px" }}
       >
-      
+      {order.map((dt)=>
         <div class="row">
           <div class="col-sm-2">
             <img
@@ -29,7 +30,7 @@ const UserOrderCard = () => {
           </div>
 
           <div class="col-sm-5">
-            <h3>Barbeque Nation</h3>
+            <h3>{dt.outlet?dt.outlet.businessName:"KFC"}</h3>
             <a href="/details/jagadish">
               <button type="button" class="btn btn-success">
                 View Offer Page
@@ -38,37 +39,37 @@ const UserOrderCard = () => {
             <p class="vouchertxt">
               Purchased Date:{" "}
               <span>
-                <b>09 Aug 2020</b>
+                <b>{moment(dt.purchasedOn).format('LLLL')}</b>
               </span>
             </p>
             <p class="vouchertxt">
               Order Id:{" "}
               <span>
-                <b>AFUC-2008-BARB-0001</b>
+                <b>{dt._id}</b>
               </span>
             </p>
             <p class="vouchertxt">
               From Date:{" "}
               <span>
-                <b>01/01/1970</b>
+                <b>{dt.deal.valid.from}</b>
               </span>
             </p>
             <p class="vouchertxt">
               To Date:{" "}
               <span>
-                <b>01/01/1970</b>
+                <b>{dt.deal.valid.to}</b>
               </span>
             </p>
             <p class="vouchertxt">
               Total Adults:{" "}
               <span>
-                <b></b>
+                <b>{dt.deal.adult}</b>
               </span>
             </p>
             <p class="vouchertxt">
               Total Child:{" "}
               <span>
-                <b></b>
+                <b>{dt.deal.child}</b>
               </span>
             </p>
           </div>
@@ -79,7 +80,7 @@ const UserOrderCard = () => {
                   <tr>
                     <th>
                       <b>VOUCHER ID:</b>
-                      <span class="voucherid"> AFUC-BARB-5F30-2367-32F8</span>
+                      <span class="voucherid"> {dt.redeemCode}</span>
                     </th>
                     <th>
                       <b>STATUS:</b>
@@ -93,7 +94,7 @@ const UserOrderCard = () => {
                     </th>
                     <th>
                       <b>USE BY:</b>
-                      <span class="voucherid"> 31 Aug 2020</span>
+                      <span class="voucherid">{dt.deal.valid.to}</span>
                     </th>
                     <th>
                       <a
@@ -124,7 +125,7 @@ const UserOrderCard = () => {
                   <tr>
                     <td>123</td>
                     <td> </td>
-                    <td>₹ 1.00</td>
+                    <td>₹ {dt.deal.price}</td>
                     <td></td>
                   </tr>
                 </tbody>
@@ -132,7 +133,7 @@ const UserOrderCard = () => {
               <br />
             </div>
           </div>
-        </div>
+        </div>)}
       </div>
       {/* </div> */}
       {/* </div> */}
