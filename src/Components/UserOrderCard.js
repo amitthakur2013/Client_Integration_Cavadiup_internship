@@ -13,6 +13,29 @@ const UserOrderCard = () => {
     })
   },[])
 
+  async function generatePdf(dt) {
+   const resp=await axios.post("http://localhost:3124/api/viewpdf/generatePDF",{
+      "pId":dt.deal._id,
+    "merchant":dt.outlet.businessName,
+    "address_line1":"hfyuyu yfii yf",
+    "state":"maharashtra",
+    "zip_code":"713322",
+    "vchr_code":dt.redeemCode,
+    "vchr_amt":dt.price,
+    "adult":dt.deal.adult,
+    "child":dt.deal.child,
+    "status":dt.status,
+    "valid_from":dt.deal.valid.from,
+    "valid_to":dt.deal.valid.to,
+    "from_date":dt.deal.valid.from,
+    "to_date":dt.deal.valid.to,
+    "image":dt.deal.img
+    },{withCredentials:true})
+    alert(resp.data);
+    
+  }
+
+
   return (
     <>
       <div
@@ -97,19 +120,16 @@ const UserOrderCard = () => {
                       <span class="voucherid">{dt.deal.valid.to}</span>
                     </th>
                     <th>
-                      <a
-                        href="http://all4you.co.in/details/download?o_id=470"
-                        target="_blank"
-                        id="AFUC-BARB-5F30-2367-32F8"
-                      >
-                        <button
+                     
+                        <button onClick={()=>generatePdf(dt)}
                           type="button"
                           style={{ marginTop: "-6px" }}
                           class="btn btn-success"
                         >
-                          View PDF
+                          Generate PDF
                         </button>
-                      </a>
+                        <a target="_blank" href="http://localhost:3124/api/viewpdf/fetch-pdf">View</a>
+                      
                     </th>
                   </tr>
                   <tr>
