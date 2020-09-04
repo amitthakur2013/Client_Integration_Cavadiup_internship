@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import swal from 'sweetalert';
+
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const login=async(e) => {
     e.preventDefault()
+    try{
     const data=await axios.post("http://localhost:3124/api/customer/login",{
       username,
       password
@@ -16,21 +19,21 @@ const LoginForm = () => {
         'Content-Type': 'application/json'
       }
     })
-    
       console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
       console.log(data)
       localStorage.setItem("user",JSON.stringify(data));
       window.location.reload(false);
+  } catch(err) {
+    swal({
+        title: "Email/phone or Password does not match",
+        text: "",
+        icon: "error",
+        button: "Close",
+      });
   }
-
-  const getUser=async(e)=>{
-    e.preventDefault()
-    const usr=await axios.get("http://localhost:3124/api/customer/my-account",{withCredentials:true})
-
-    console.log(usr.data);
-  }
-
   
+    
+  }
   
   return (
     <Form>
@@ -59,10 +62,6 @@ const LoginForm = () => {
 
       <Button onClick={(e) => login(e)} variant="primary" type="submit">
         Login
-      </Button>
-
-      <Button onClick={(e) => getUser(e)} variant="primary" type="submit">
-        user
       </Button>
     </Form>
   );

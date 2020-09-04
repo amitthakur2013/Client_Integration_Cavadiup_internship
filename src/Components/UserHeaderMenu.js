@@ -33,8 +33,7 @@ const UserHeaderMenu = () => {
         as={CustomToggle}
         setShow={setShow}
         id="dropdown-custom-components"
-      >
-        My Account
+      >My Account
       </Dropdown.Toggle>
 
       {show && (

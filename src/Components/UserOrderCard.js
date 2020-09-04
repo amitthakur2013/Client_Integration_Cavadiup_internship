@@ -14,7 +14,10 @@ const UserOrderCard = () => {
   },[])
 
   async function generatePdf(dt) {
-   const resp=await axios.post("http://localhost:3124/api/viewpdf/generatePDF",{
+  let btn1=document.querySelector('#generate')
+  let btn2=document.querySelector('#ready')
+  btn1.textContent="Loading...";
+   const resp=await axios.post(`http://localhost:3124/api/viewpdf/generatePDF/${dt._id}`,{
       "pId":dt.deal._id,
     "merchant":dt.outlet.businessName,
     "address_line1":"hfyuyu yfii yf",
@@ -31,7 +34,8 @@ const UserOrderCard = () => {
     "to_date":dt.deal.valid.to,
     "image":dt.deal.img
     },{withCredentials:true})
-    alert(resp.data);
+    btn1.style.display="none";
+    btn2.style.display="block";
     
   }
 
@@ -121,15 +125,18 @@ const UserOrderCard = () => {
                     </th>
                     <th>
                      
-                        <button onClick={()=>generatePdf(dt)}
+                        <button id="generate" onClick={()=>generatePdf(dt)}
                           type="button"
                           style={{ marginTop: "-6px" }}
                           class="btn btn-success"
                         >
                           Generate PDF
                         </button>
-                        <a target="_blank" href="http://localhost:3124/api/viewpdf/fetch-pdf">View</a>
-                      
+                        <button  id="ready" type="button"
+                          style={{ marginTop: "-6px" , display:"none"}}
+                          class="btn btn-success">
+                        <a style={{color:"white",textDecoration:"none"}} target="_blank" href={`http://localhost:3124/api/viewpdf/fetch-pdf/${dt._id}`}>View</a>
+                        </button>
                     </th>
                   </tr>
                   <tr>

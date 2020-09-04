@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Modal, Button, Tabs, Tab } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 import SignupForm from "./SignupForm";
+import ForgotForm from "./ForgotForm";
 function LoginModal() {
   const [show, setShow] = useState(false);
 
@@ -26,6 +27,9 @@ function LoginModal() {
             </Tab>
             <Tab eventKey="signup" title="Signup">
               <SignupForm />
+            </Tab>
+            <Tab eventKey="forgot" title="Forgot Password">
+              <ForgotForm />
             </Tab>
           </Tabs>
         </Modal.Body>

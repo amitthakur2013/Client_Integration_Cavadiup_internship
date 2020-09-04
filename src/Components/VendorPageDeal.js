@@ -327,8 +327,8 @@ const VendorPageDeal = ({ deal, qty, addToCart, removeFromCart, type }) => {
                 <p style={{ marginBottom: "10px" }}>Free Cancellation</p>
                 <small>
                   <strong>Valid For :</strong> all |
-                  <strong>Valid from :</strong> {deal.valide.from}
-                  <strong>Valid to :</strong> {deal.valide.to}
+                  <strong>Valid from :</strong> {deal.valid.from}
+                  <strong>Valid to :</strong> {deal.valid.to}
                   <strong>Timings :</strong> all days
                 </small>
                 <br />

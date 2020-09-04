@@ -55,7 +55,6 @@ const HeaderTop = ({ setShowChangeLocation, location }) => {
           <li>
              <a className="" href="#"> 
             {localStorage.getItem('user') ? <UserHeaderMenu />  : <LoginModal />}
-            {/*<LoginModal /> */}
              </a> 
           </li>
           {localStorage.getItem('user') &&
