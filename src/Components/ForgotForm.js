@@ -12,8 +12,8 @@ const ForgotForm = () => {
     .then((resp)=>{
       if(resp.data.includes("@")){
         swal({
-        title: resp.data,
-        text: "",
+        title: "Email Sent",
+        text: resp.data,
         icon: "success",
         button: "Close",
       });
@@ -51,10 +51,10 @@ const ForgotForm = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           type="text"
-          placeholder="Enter email or phone"
+          placeholder="Enter email"
         />
         <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
+          Enter email associated to your account.
         </Form.Text>
       </Form.Group>
 

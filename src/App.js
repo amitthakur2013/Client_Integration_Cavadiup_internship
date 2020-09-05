@@ -11,6 +11,7 @@ import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 import MerchantsPage from "./Components/MerchantsPage";
 import CreateMerchant from "./Components/Admin/Merchant/CreateMerchant";
+import ResetForm from "./Components/ResetForm";
 
 function App() {
   return (
@@ -43,6 +44,11 @@ function App() {
                   component={CreateMerchant}
                   {...props}
                 />
+                <Route 
+                path="/reset/:token" component={ResetForm} 
+                {...props}
+                />
+
               </Switch>
               { <Footer /> }
             </>
